@@ -146,7 +146,7 @@ namespace ts {
         undefined: SyntaxKind.UndefinedKeyword,
         unique: SyntaxKind.UniqueKeyword,
         unknown: SyntaxKind.UnknownKeyword,
-        var: SyntaxKind.VarKeyword,
+        // here lies var fuck you
         void: SyntaxKind.VoidKeyword,
         while: SyntaxKind.WhileKeyword,
         with: SyntaxKind.WithKeyword,

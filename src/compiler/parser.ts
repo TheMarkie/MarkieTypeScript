@@ -5664,7 +5664,7 @@ namespace ts {
 
             let initializer!: VariableDeclarationList | Expression;
             if (token() !== SyntaxKind.SemicolonToken) {
-                if (token() === SyntaxKind.VarKeyword || token() === SyntaxKind.LetKeyword || token() === SyntaxKind.ConstKeyword) {
+                if (token() === SyntaxKind.LetKeyword || token() === SyntaxKind.ConstKeyword) {
                     initializer = parseVariableDeclarationList(/*inForStatementInitializer*/ true);
                 }
                 else {
@@ -5880,7 +5880,6 @@ namespace ts {
         function isDeclaration(): boolean {
             while (true) {
                 switch (token()) {
-                    case SyntaxKind.VarKeyword:
                     case SyntaxKind.LetKeyword:
                     case SyntaxKind.ConstKeyword:
                     case SyntaxKind.FunctionKeyword:
@@ -5967,7 +5966,6 @@ namespace ts {
                 case SyntaxKind.AtToken:
                 case SyntaxKind.SemicolonToken:
                 case SyntaxKind.OpenBraceToken:
-                case SyntaxKind.VarKeyword:
                 case SyntaxKind.LetKeyword:
                 case SyntaxKind.FunctionKeyword:
                 case SyntaxKind.ClassKeyword:
@@ -6039,8 +6037,6 @@ namespace ts {
                     return parseEmptyStatement();
                 case SyntaxKind.OpenBraceToken:
                     return parseBlock(/*ignoreMissingOpenBrace*/ false);
-                case SyntaxKind.VarKeyword:
-                    return parseVariableStatement(getNodePos(), hasPrecedingJSDocComment(), /*decorators*/ undefined, /*modifiers*/ undefined);
                 case SyntaxKind.LetKeyword:
                     if (isLetDeclaration()) {
                         return parseVariableStatement(getNodePos(), hasPrecedingJSDocComment(), /*decorators*/ undefined, /*modifiers*/ undefined);
@@ -6150,7 +6146,6 @@ namespace ts {
 
         function parseDeclarationWorker(pos: number, hasJSDoc: boolean, decorators: NodeArray<Decorator> | undefined, modifiers: NodeArray<Modifier> | undefined): Statement {
             switch (token()) {
-                case SyntaxKind.VarKeyword:
                 case SyntaxKind.LetKeyword:
                 case SyntaxKind.ConstKeyword:
                     return parseVariableStatement(pos, hasJSDoc, decorators, modifiers);
@@ -6296,8 +6291,6 @@ namespace ts {
 
             let flags: NodeFlags = 0;
             switch (token()) {
-                case SyntaxKind.VarKeyword:
-                    break;
                 case SyntaxKind.LetKeyword:
                     flags |= NodeFlags.Let;
                     break;
